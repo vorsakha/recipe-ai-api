@@ -1,6 +1,6 @@
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import { DataSource } from "typeorm";
-import env from "@/config/envs";
+import env from "@constants/envs";
 
 const AppDataSource = new DataSource({
   type: "postgres",

@@ -8,11 +8,26 @@
       "@auth/*": [
         "src/auth/*"
       ],
-      "@config/*": [
-        "src/config/*"
-      ],
       "@support/*": [
         "src/modules/support/*"
+      ],
+      "@constants/*": [
+        "src/constants/*"
+      ],
+      "@models/*": [
+        "src/models/*"
+      ],
+      "@controllers/*": [
+        "src/controllers/*"
+      ],
+      "@database/*": [
+        "src/database/*"
+      ],
+      "@middlewares/*": [
+        "src/middlewares/*"
+      ],
+      "@routes/*": [
+        "src/routes/*"
       ],
     },
     "outDir": "dist",

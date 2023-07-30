@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import env from "@/config/envs";
+import env from "@constants/envs";
 
 import router from "@/router";
 
