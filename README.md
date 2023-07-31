@@ -1,4 +1,5 @@
 # RecipeAI API
+Recipe AI is an application that uses machine learning to recommend recipes based on the ingredients you have at home.
 
 ## Prerequisites
 
