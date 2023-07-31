@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import AppDataSource from "./datasource.config";
+import AppDataSource from "@database/config/datasource.config";
 
 const connect = async (): Promise<DataSource> => {
   return AppDataSource.initialize();
