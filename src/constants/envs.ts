@@ -11,6 +11,7 @@ const {
   PORT,
   AUTH_JWT_SECRET,
   AUTH_JWT_REFRESH_SECRET,
+  OPENAI_API_KEY,
 } = process.env;
 
 const config = {
@@ -22,6 +23,7 @@ const config = {
   PORT: PORT || "",
   AUTH_JWT_SECRET: AUTH_JWT_SECRET || "",
   AUTH_JWT_REFRESH_SECRET: AUTH_JWT_REFRESH_SECRET || "",
+  OPENAI_API_KEY: OPENAI_API_KEY || "",
 };
 
 export default config;

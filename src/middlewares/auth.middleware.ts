@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import config from "@constants/envs";
+import { UserRequest } from "@/types";
 
-export default function authMiddleware(
-  req: Request,
+export default async function authMiddleware(
+  req: UserRequest,
   res: Response,
   next: NextFunction,
 ) {
@@ -16,7 +17,11 @@ export default function authMiddleware(
   const [, token] = authHeader.split(" ");
 
   try {
-    jwt.verify(token, config.AUTH_JWT_SECRET);
+    const decodedToken = jwt.verify(token, config.AUTH_JWT_SECRET) as {
+      id: string;
+    };
+
+    req.userId = decodedToken.id;
     return next();
   } catch {
     return res.sendStatus(401).send({ error: "Invalid token" });

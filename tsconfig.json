@@ -29,6 +29,9 @@
       "@routes/*": [
         "src/routes/*"
       ],
+      "@services/*": [
+        "src/services/*"
+      ],
     },
     "outDir": "dist",
     "emitDecoratorMetadata": true,
