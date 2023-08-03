@@ -1,5 +1,5 @@
-# RecipeAI API
-Recipe AI is an application that uses machine learning to recommend recipes based on the ingredients you have at home.
+# :spaghetti: RecipeAI API :spaghetti: 
+Recipe AI is an application that the power of AI to help you find the best recipes that are easily available to you.
 
 ## Prerequisites
 
@@ -38,4 +38,9 @@ make migration-revert
 ### Apply migrations
 ```bash
 make migration-run
+```
+
+## API Docs
+```bash
+localhost:3000/docs
 ```

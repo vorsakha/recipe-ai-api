@@ -3,6 +3,7 @@ import cors from "cors";
 import env from "@constants/envs";
 
 import router from "@/router";
+import swagger from "@/swagger";
 
 const init = () => {
   const app = express();
@@ -12,6 +13,7 @@ const init = () => {
   app.use(express.urlencoded({ extended: true }));
 
   app.use(router);
+  swagger.serve(app);
 
   return app;
 };

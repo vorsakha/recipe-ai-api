@@ -35,6 +35,12 @@
       "@validators/*": [
         "src/validators/*"
       ],
+      "@docs/*": [
+        "src/docs/*"
+      ],
+      "@schemas/*": [
+        "src/schemas/*"
+      ],
     },
     "outDir": "dist",
     "emitDecoratorMetadata": true,
