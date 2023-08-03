@@ -32,6 +32,9 @@
       "@services/*": [
         "src/services/*"
       ],
+      "@validators/*": [
+        "src/validators/*"
+      ],
     },
     "outDir": "dist",
     "emitDecoratorMetadata": true,
