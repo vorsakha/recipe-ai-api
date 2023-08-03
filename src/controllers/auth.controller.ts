@@ -15,13 +15,13 @@ class AuthController {
     const user = await userRepository.findOne({ where: { email } });
 
     if (!user) {
-      return res.sendStatus(401).json({ error: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      return res.sendStatus(401).json({ error: "Invalid password" });
+      return res.status(401).json({ error: "Invalid password" });
     }
 
     const token = jwt.sign({ id: user.id }, config.AUTH_JWT_SECRET, {

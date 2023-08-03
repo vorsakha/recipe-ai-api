@@ -24,6 +24,6 @@ export default async function authMiddleware(
     req.userId = decodedToken.id;
     return next();
   } catch {
-    return res.sendStatus(401).send({ error: "Invalid token" });
+    return res.status(401).send({ error: "Invalid token" });
   }
 }

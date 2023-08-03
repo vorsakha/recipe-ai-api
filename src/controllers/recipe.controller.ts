@@ -119,7 +119,7 @@ class RecipeController {
 
     await recipeRepository.remove(recipe);
 
-    return res.status(204).json({ message: "Recipe deleted" });
+    return res.status(200).json({ message: "Recipe deleted" });
   }
 }
 
