@@ -1,5 +1,5 @@
 # :spaghetti: RecipeAI API :spaghetti: 
-Recipe AI is an application that the power of AI to help you find the best recipes that are easily available to you.
+Recipe AI is an application that leverages the power of AI to help you find the best recipes that are easily available to you.
 
 ## Prerequisites
 
