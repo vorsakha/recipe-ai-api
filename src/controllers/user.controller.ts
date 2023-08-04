@@ -19,8 +19,12 @@ class UserController {
     const user = userRepository.create({ email, password });
 
     await userRepository.save(user);
+    const userWithoutPassword = { ...user, password: undefined };
 
-    return res.json({ user, message: "User created successfully" });
+    return res.json({
+      user: userWithoutPassword,
+      message: "User created successfully",
+    });
   }
 
   async index(req: Request, res: Response) {
@@ -42,7 +46,9 @@ class UserController {
       return res.status(404).json({ error: "User not found" });
     }
 
-    return res.json(user);
+    const userWithoutPassword = { ...user, password: undefined };
+
+    return res.json({ user: userWithoutPassword });
   }
 
   async update(req: UserRequest, res: Response) {
@@ -67,7 +73,12 @@ class UserController {
 
     await userRepository.save(user);
 
-    return res.json({ user, message: "User updated successfully" });
+    const userWithoutPassword = { ...user, password: undefined };
+
+    return res.json({
+      user: userWithoutPassword,
+      message: "User updated successfully",
+    });
   }
 
   async delete(req: UserRequest, res: Response) {
@@ -102,7 +113,9 @@ class UserController {
       return res.status(404).json({ error: "User not found" });
     }
 
-    return res.json(user);
+    const userWithoutPassword = { ...user, password: undefined };
+
+    return res.json({ user: userWithoutPassword });
   }
 }
 

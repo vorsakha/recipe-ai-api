@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 
-import { UserRequest } from "@/types";
+import { UserRequest, UserWithoutPassword } from "@/types";
 import AppDataSource from "@database/config/datasource.config";
 import Recipe from "@models/recipe.entity";
-import User from "@models/user.entity";
 import RecipeService from "@services/recipe.service";
 
 class RecipeController {
@@ -22,9 +21,7 @@ class RecipeController {
     const { title, ingredients, locale } = req.body;
     const { userId } = req;
     const recipeRepository = AppDataSource.getRepository(Recipe);
-    const userRepository = AppDataSource.getRepository(User);
 
-    const user = await userRepository.findOne({ where: { id: userId } });
     const recipeExists = await recipeRepository.findOne({ where: { title } });
     let rules = recipeExists?.rules || [];
     let description = recipeExists?.description || "";
@@ -43,7 +40,7 @@ class RecipeController {
       title,
       description,
       rules,
-      user: user as User,
+      user: { id: userId },
     });
 
     await recipeRepository.save(recipe);
@@ -56,7 +53,17 @@ class RecipeController {
 
     const recipes = await recipeRepository.find({ relations: ["user"] });
 
-    return res.json({ recipes });
+    const recipesObj = recipes.map((recipe) => {
+      const transformedUser: UserWithoutPassword = {
+        id: recipe.user.id,
+        email: recipe.user.email,
+        created_at: recipe.user.created_at,
+      };
+
+      return { ...recipe, user: transformedUser };
+    });
+
+    return res.json({ recipes: recipesObj });
   }
 
   async show(req: Request, res: Response) {
@@ -68,8 +75,13 @@ class RecipeController {
       where: { id },
       relations: ["user"],
     });
+    const transformedUser: UserWithoutPassword = {
+      id: recipe?.user.id,
+      email: recipe?.user.email,
+      created_at: recipe?.user.created_at,
+    };
 
-    return res.json({ recipe });
+    return res.json({ ...recipe, user: transformedUser });
   }
 
   async me(req: UserRequest, res: Response) {
@@ -82,7 +94,17 @@ class RecipeController {
       relations: ["user"],
     });
 
-    return res.json({ recipes });
+    const recipesObj = recipes.map((recipe) => {
+      const transformedUser: UserWithoutPassword = {
+        id: recipe.user.id,
+        email: recipe.user.email,
+        created_at: recipe.user.created_at,
+      };
+
+      return { ...recipe, user: transformedUser };
+    });
+
+    return res.json({ recipes: recipesObj });
   }
 
   async update(req: Request, res: Response) {
