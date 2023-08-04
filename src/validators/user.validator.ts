@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
+import { UNPROCESSABLE_ENTITY } from "http-status";
 
 export const userPostValidator = [
   body("email").isEmail().withMessage("Invalid email"),
@@ -10,7 +11,7 @@ export const userPostValidator = [
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
+      return res.status(UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
     }
     return next();
   },

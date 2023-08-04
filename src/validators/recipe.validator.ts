@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { body, param, validationResult } from "express-validator";
+import { UNPROCESSABLE_ENTITY } from "http-status";
 
 export const recipeStoreValidator = [
   body("title").isString().notEmpty().withMessage("Title is required"),
@@ -11,7 +12,7 @@ export const recipeStoreValidator = [
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
+      return res.status(UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
     }
     return next();
   },
@@ -22,7 +23,7 @@ export const recipeShowValidator = [
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
+      return res.status(UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
     }
     return next();
   },
@@ -39,7 +40,7 @@ export const recipeUpdateValidator = [
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
+      return res.status(UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
     }
     return next();
   },
@@ -50,7 +51,7 @@ export const recipeDeleteValidator = [
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
+      return res.status(UNPROCESSABLE_ENTITY).json({ errors: errors.array() });
     }
     return next();
   },

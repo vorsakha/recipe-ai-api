@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { NOT_FOUND, UNAUTHORIZED } from "http-status";
+
 import config from "@constants/envs";
-
 import AppDataSource from "@database/config/datasource.config";
-
 import User from "@models/user.entity";
 
 class AuthController {
@@ -15,13 +15,13 @@ class AuthController {
     const user = await userRepository.findOne({ where: { email } });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(NOT_FOUND).json({ error: "User not found" });
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
-      return res.status(401).json({ error: "Invalid password" });
+      return res.status(UNAUTHORIZED).json({ error: "Invalid password" });
     }
 
     const token = jwt.sign({ id: user.id }, config.AUTH_JWT_SECRET, {

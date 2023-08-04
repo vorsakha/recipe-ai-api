@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
+import { CONFLICT, NOT_FOUND, UNAUTHORIZED } from "http-status";
 
 import AppDataSource from "@database/config/datasource.config";
-
 import User from "@models/user.entity";
 import { UserRequest } from "@/types";
 
@@ -13,7 +13,7 @@ class UserController {
 
     const userExists = await userRepository.findOne({ where: { email } });
     if (userExists) {
-      return res.status(409).json({ error: "User already exists" });
+      return res.status(CONFLICT).json({ error: "User already exists" });
     }
 
     const user = userRepository.create({ email, password });
@@ -43,7 +43,7 @@ class UserController {
     const user = await userRepository.findOne({ where: { id } });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(NOT_FOUND).json({ error: "User not found" });
     }
 
     const userWithoutPassword = { ...user, password: undefined };
@@ -65,7 +65,7 @@ class UserController {
     const user = await userRepository.findOne({ where: { id } });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(NOT_FOUND).json({ error: "User not found" });
     }
 
     user.email = email;
@@ -86,7 +86,7 @@ class UserController {
     const { userId } = req;
 
     if (userId !== id) {
-      return res.status(401).json({ error: "Unauthorized" });
+      return res.status(UNAUTHORIZED).json({ error: "Unauthorized" });
     }
 
     const userRepository = AppDataSource.getRepository(User);
@@ -94,7 +94,7 @@ class UserController {
     const user = await userRepository.findOne({ where: { id } });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(NOT_FOUND).json({ error: "User not found" });
     }
 
     await userRepository.delete({ id });
@@ -110,7 +110,7 @@ class UserController {
     const user = await userRepository.findOne({ where: { id: userId } });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(NOT_FOUND).json({ error: "User not found" });
     }
 
     const userWithoutPassword = { ...user, password: undefined };

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { NOT_FOUND, OK } from "http-status";
 
 import { UserRequest, UserWithoutPassword } from "@/types";
 import AppDataSource from "@database/config/datasource.config";
@@ -116,7 +117,7 @@ class RecipeController {
     const recipe = await recipeRepository.findOne({ where: { id } });
 
     if (!recipe) {
-      return res.status(404).json({ error: "Recipe not found" });
+      return res.status(NOT_FOUND).json({ error: "Recipe not found" });
     }
 
     recipe.title = title;
@@ -136,12 +137,12 @@ class RecipeController {
     const recipe = await recipeRepository.findOne({ where: { id } });
 
     if (!recipe) {
-      return res.status(404).json({ error: "Recipe not found" });
+      return res.status(NOT_FOUND).json({ error: "Recipe not found" });
     }
 
     await recipeRepository.remove(recipe);
 
-    return res.status(200).json({ message: "Recipe deleted" });
+    return res.status(OK).json({ message: "Recipe deleted" });
   }
 }
 
