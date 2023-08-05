@@ -2,6 +2,7 @@ README.md
 .gitignore
 .env.example
 .editorconfig
+.husky
 Makefile
 Jenkinsfile
 Dockerfile
