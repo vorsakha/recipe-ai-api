@@ -8,9 +8,6 @@
       "@auth/*": [
         "src/auth/*"
       ],
-      "@support/*": [
-        "src/modules/support/*"
-      ],
       "@constants/*": [
         "src/constants/*"
       ],
@@ -41,6 +38,9 @@
       "@schemas/*": [
         "src/schemas/*"
       ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
     },
     "outDir": "dist",
     "emitDecoratorMetadata": true,
@@ -55,7 +55,5 @@
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts",
-    "**/*.test.ts"
   ]
 }
